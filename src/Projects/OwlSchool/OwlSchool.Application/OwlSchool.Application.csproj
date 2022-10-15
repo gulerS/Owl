@@ -19,12 +19,6 @@
       <ProjectReference Include="..\..\..\Core\Core.Persistence\Core.Persistence.csproj" />
       <ProjectReference Include="..\OwlSchool.Domain\OwlSchool.Domain.csproj" />
     </ItemGroup>
-
-    
-    
-    <ItemGroup>
-      <Folder Include="Features\Classes\Queries" />
-    </ItemGroup>
     
     
 

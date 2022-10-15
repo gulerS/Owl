@@ -1,3 +1,4 @@
+using Core.CrossCuttingConcerns.Exceptions;
 using OwlSchool.Application;
 using OwlSchool.Persistence;
 
@@ -26,6 +27,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+if (app.Environment.IsProduction())
+ app.ConfigureCustomExceptionMiddleware();
 
 app.UseHttpsRedirection();
 
