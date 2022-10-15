@@ -1,1 +1,1 @@
-# :metal: :rocket: CQRS, Clean Architecture, DDD Improvised coding
+# :metal: :rocket: CQRS, Clean Architecture, DDD improvised coding
