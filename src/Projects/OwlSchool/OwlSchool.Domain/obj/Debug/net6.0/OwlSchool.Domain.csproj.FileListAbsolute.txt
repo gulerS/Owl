@@ -1,0 +1,12 @@
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\bin\Debug\net6.0\OwlSchool.Domain.deps.json
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\bin\Debug\net6.0\OwlSchool.Domain.dll
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\bin\Debug\net6.0\OwlSchool.Domain.pdb
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\OwlSchool.Domain.csproj.AssemblyReference.cache
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\OwlSchool.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\OwlSchool.Domain.AssemblyInfoInputs.cache
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\OwlSchool.Domain.AssemblyInfo.cs
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\OwlSchool.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\OwlSchool.Domain.dll
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\refint\OwlSchool.Domain.dll
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\OwlSchool.Domain.pdb
+C:\Users\Sercan\RiderProjects\OwlSchool\src\Projects\OwlSchool\OwlSchool.Domain\obj\Debug\net6.0\ref\OwlSchool.Domain.dll

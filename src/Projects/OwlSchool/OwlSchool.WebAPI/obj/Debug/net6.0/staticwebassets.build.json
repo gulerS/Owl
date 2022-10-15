@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "6mZUZZrPauIdbpwInbYgTxMUjwCLmoZ1EU8hxh9fY9U=",
+  "Source": "OwlSchool.WebAPI",
+  "BasePath": "_content/OwlSchool.WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
