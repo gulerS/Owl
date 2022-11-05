@@ -1,4 +1,5 @@
 using Core.Application.Requests;
+using Microsoft.AspNetCore.Authorization;
 using OwlSchool.Application.Features.Classes.Commands.CreateClass;
 using OwlSchool.Application.Features.Classes.Dtos;
 
@@ -22,6 +23,7 @@ public class ClassController : BaseController
         return Created("", result);
     }
 
+    [Authorize]
     [HttpGet("GetClassList")]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
     {
@@ -29,6 +31,7 @@ public class ClassController : BaseController
         ClassListModel result = await Mediator.Send(getListClassQuery);
         return Ok(result);
     }
+
 
     [HttpGet("GetClass/{Id}")]
     public async Task<IActionResult> GetById([FromRoute] GetByIdClassQuery getByIdIdClassQuery)

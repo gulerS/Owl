@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Security.Entities;
 using OwlSchool.Domain.Entities;
 
 namespace OwlSchool.Persistence.Contexts;
@@ -14,6 +15,10 @@ namespace OwlSchool.Persistence.Contexts;
     {
         protected IConfiguration Configuration { get; set; }
         public DbSet<Class> Classes { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
+        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
 
         public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
