@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using OwlSchool.Application;
+using OwlSchool.Infrastructure;
 using OwlSchool.Persistence;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -79,4 +80,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseCors(opt =>
+                opt.WithOrigins("http://localhost:4200", "http://localhost:5278")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials());
 app.Run();

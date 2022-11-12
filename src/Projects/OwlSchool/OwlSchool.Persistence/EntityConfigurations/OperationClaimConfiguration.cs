@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Persistence.EntityConfigurations
+namespace OwlSchool.Persistence.EntityConfigurations
 {
     public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationClaim>
     {

@@ -3,7 +3,7 @@ using Core.Security.Entities;
 using OwlSchool.Application.Services.Repositories;
 using OwlSchool.Persistence.Contexts;
 
-namespace Persistence.Repositories;
+namespace OwlSchool.Persistence.Repositories;
 
 public class OtpAuthenticatorRepository : EfRepositoryBase<OtpAuthenticator, BaseDbContext>, IOtpAuthenticatorRepository
 {

@@ -4,7 +4,6 @@ using Microsoft.Extensions.DependencyInjection;
 using OwlSchool.Application.Services.Repositories;
 using OwlSchool.Persistence.Contexts;
 using OwlSchool.Persistence.Repositories;
-using Persistence.Repositories;
 
 namespace OwlSchool.Persistence;
 
