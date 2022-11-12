@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OwlSchool.Application.Features.Classes.Dtos;
+﻿namespace OwlSchool.Application.Features.Classes.Dtos;
     public class ClassListDto
     {
         public int Id { get; set; }

@@ -1,7 +1,6 @@
 using FluentValidation;
-using OwlSchool.Application.Features.Classes.Queries.GetByIdClass;
 
-namespace OwlSchool.Application.Features.Classes.Commands.CreateClass;
+namespace OwlSchool.Application.Features.Classes.Queries.GetByIdClass;
 
 public class GetByIdClassQueryValidator:AbstractValidator<GetByIdClassQuery>
 {

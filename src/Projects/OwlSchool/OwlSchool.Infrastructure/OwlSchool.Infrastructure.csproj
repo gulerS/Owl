@@ -6,4 +6,15 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+        <PackageReference Include="CloudinaryDotNet" Version="1.20.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\Core.Application\Core.Application.csproj" />
+      <ProjectReference Include="..\OwlSchool.Application\OwlSchool.Application.csproj" />
+    </ItemGroup>
+
+  
+
 </Project>

@@ -2,6 +2,7 @@
 using Core.Security.Entities;
 
 namespace OwlSchool.Application.Services.Repositories;
-    public interface IUserOperationClaimRepository : IAsyncRepository<UserOperationClaim>, IRepository<UserOperationClaim>
-    {
-    }
+
+public interface IUserOperationClaimRepository : IAsyncRepository<UserOperationClaim>, IRepository<UserOperationClaim>
+{
+}

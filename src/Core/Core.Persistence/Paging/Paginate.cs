@@ -1,23 +1,23 @@
-namespace Core.Persistence.Paging;
+﻿namespace Core.Persistence.Paging;
 
 public class Paginate<T> : IPaginate<T>
 {
-    internal Paginate(IEnumerable<T> source, int index, int size, int from)
+    public Paginate(IEnumerable<T> source, int index, int size, int from)
     {
         var enumerable = source as T[] ?? source.ToArray();
 
         if (from > index)
             throw new ArgumentException($"indexFrom: {from} > pageIndex: {index}, must indexFrom <= pageIndex");
 
-        if (source is IQueryable<T> querable)
+        if (source is IQueryable<T> queryable)
         {
             Index = index;
             Size = size;
             From = from;
-            Count = querable.Count();
+            Count = queryable.Count();
             Pages = (int)Math.Ceiling(Count / (double)Size);
 
-            Items = querable.Skip((Index - From) * Size).Take(Size).ToList();
+            Items = queryable.Skip((Index - From) * Size).Take(Size).ToList();
         }
         else
         {
@@ -32,9 +32,9 @@ public class Paginate<T> : IPaginate<T>
         }
     }
 
-    internal Paginate()
+    public Paginate()
     {
-        Items = new T[0];
+        Items = Array.Empty<T>();
     }
 
     public int From { get; set; }
@@ -47,7 +47,7 @@ public class Paginate<T> : IPaginate<T>
     public bool HasNext => Index - From + 1 < Pages;
 }
 
-internal class Paginate<TSource, TResult> : IPaginate<TResult>
+public class Paginate<TSource, TResult> : IPaginate<TResult>
 {
     public Paginate(IEnumerable<TSource> source, Func<IEnumerable<TSource>, IEnumerable<TResult>> converter,
                     int index, int size, int from)

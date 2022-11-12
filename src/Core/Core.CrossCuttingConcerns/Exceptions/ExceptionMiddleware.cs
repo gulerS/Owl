@@ -1,17 +1,23 @@
-using System.Net;
-using FluentValidation;
+﻿using Core.CrossCuttingConcerns.Exceptions.Handlers;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using Core.CrossCuttingConcerns.Logging;
+using Core.CrossCuttingConcerns.Logging.Serilog;
+using Newtonsoft.Json;
 
 namespace Core.CrossCuttingConcerns.Exceptions;
 
 public class ExceptionMiddleware
 {
     private readonly RequestDelegate _next;
+    private readonly HttpExceptionHandler _httpExceptionHandler = new();
+    private readonly IHttpContextAccessor _contextAccessor;
+    private readonly LoggerServiceBase _loggerService;
 
-    public ExceptionMiddleware(RequestDelegate next)
+    public ExceptionMiddleware(RequestDelegate next, IHttpContextAccessor contextAccessor, LoggerServiceBase loggerService)
     {
         _next = next;
+        _contextAccessor = contextAccessor;
+        _loggerService = loggerService;
     }
 
     public async Task Invoke(HttpContext context)
@@ -22,76 +28,37 @@ public class ExceptionMiddleware
         }
         catch (Exception exception)
         {
-            await HandleExceptionAsync(context, exception);
+            await LogException(context, exception);
+            await HandleExceptionAsync(context.Response, exception);
         }
     }
 
-    private Task HandleExceptionAsync(HttpContext context, Exception exception)
+    private Task HandleExceptionAsync(HttpResponse response, Exception exception)
     {
-        context.Response.ContentType = "application/json";
-
-        if (exception.GetType() == typeof(ValidationException)) return CreateValidationException(context, exception);
-        if (exception.GetType() == typeof(BusinessException)) return CreateBusinessException(context, exception);
-        // if (exception.GetType() == typeof(AuthorizationException))
-        //     return CreateAuthorizationException(context, exception);
-        return CreateInternalException(context, exception);
+        response.ContentType = "application/json";
+        _httpExceptionHandler.Response = response;
+        return _httpExceptionHandler.HandleExceptionAsync(exception);
     }
 
-    // private Task CreateAuthorizationException(HttpContext context, Exception exception)
-    // {
-    //     context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.Unauthorized);
-    //
-    //     return context.Response.WriteAsync(new AuthorizationProblemDetails
-    //     {
-    //         Status = StatusCodes.Status401Unauthorized,
-    //         Type = "https://example.com/probs/authorization",
-    //         Title = "Authorization exception",
-    //         Detail = exception.Message,
-    //         Instance = ""
-    //     }.ToString());
-    // }
-
-    private Task CreateBusinessException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
-
-        return context.Response.WriteAsync(new BusinessProblemDetails
+    private Task LogException(HttpContext context, Exception exception)
+    { 
+        List<LogParameter> logParameters = new()
         {
-            Status = StatusCodes.Status400BadRequest,
-            Type = "https://example.com/probs/business",
-            Title = "Business exception",
-            Detail = exception.Message,
-            Instance = ""
-        }.ToString());
-    }
+            new LogParameter
+            {
+                Type = context.GetType().Name,
+                Value = context
+            }
+        };
 
-    private Task CreateValidationException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.BadRequest);
-        object errors = ((ValidationException)exception).Errors;
-
-        return context.Response.WriteAsync(new ValidationProblemDetails
+        LogDetail logDetail = new()
         {
-            Status = StatusCodes.Status400BadRequest,
-            Type = "https://example.com/probs/validation",
-            Title = "Validation error(s)",
-            Detail = "",
-            Instance = "",
-            Errors = errors
-        }.ToString());
-    }
+            MethodName = _next.Method.Name,
+            Parameters = logParameters,
+            User = _contextAccessor.HttpContext?.User.Identity?.Name ?? "?"
+        };
 
-    private Task CreateInternalException(HttpContext context, Exception exception)
-    {
-        context.Response.StatusCode = Convert.ToInt32(HttpStatusCode.InternalServerError);
-
-        return context.Response.WriteAsync(new ProblemDetails
-        {
-            Status = StatusCodes.Status500InternalServerError,
-            Type = "https://example.com/probs/internal",
-            Title = "Internal exception",
-            Detail = exception.Message,
-            Instance = ""
-        }.ToString());
+        _loggerService.Info(JsonConvert.SerializeObject(logDetail));
+        return Task.CompletedTask;
     }
 }

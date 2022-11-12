@@ -2,8 +2,6 @@ using Core.Application.Requests;
 using Microsoft.AspNetCore.Authorization;
 using OwlSchool.Application.Features.Classes.Commands.CreateClass;
 using OwlSchool.Application.Features.Classes.Dtos;
-
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OwlSchool.Application.Features.Classes.Models;
 using OwlSchool.Application.Features.Classes.Queries.GetByIdClass;

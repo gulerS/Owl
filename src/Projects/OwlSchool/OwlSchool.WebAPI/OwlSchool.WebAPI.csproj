@@ -15,6 +15,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
 	
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
@@ -24,7 +25,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\OwlSchool.Infrastructure\OwlSchool.Infrastructure.csproj" />
       <ProjectReference Include="..\OwlSchool.Persistence\OwlSchool.Persistence.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Controllers\ElasticTestController.cs" />
     </ItemGroup>
 
 

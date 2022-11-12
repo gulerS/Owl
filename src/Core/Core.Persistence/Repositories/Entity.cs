@@ -1,10 +1,11 @@
-namespace Core.Persistence.Repositories;
+﻿namespace Core.Persistence.Repositories;
 
 public class Entity
 {
     public int Id { get; set; }
-    
-    
+    public DateTime CreatedDate { get; set; }
+    public DateTime UpdatedDate { get; set; }
+
     public Entity()
     {
     }
@@ -13,5 +14,4 @@ public class Entity
     {
         Id = id;
     }
-    
 }

@@ -3,12 +3,11 @@ using Core.Security.Entities;
 using OwlSchool.Application.Services.Repositories;
 using OwlSchool.Persistence.Contexts;
 
-namespace OwlSchool.Persistence.Repositories;
+namespace Persistence.Repositories;
 
-    public class OperationClaimRepository : EFRepositoryBase<OperationClaim, BaseDbContext>, IOperationClaimRepository
+public class OperationClaimRepository : EfRepositoryBase<OperationClaim, BaseDbContext>, IOperationClaimRepository
+{
+    public OperationClaimRepository(BaseDbContext context) : base(context)
     {
-        public OperationClaimRepository(BaseDbContext context) : base(context)
-        {
-        }
     }
-
+}

@@ -3,6 +3,6 @@ using Core.Security.Entities;
 
 namespace OwlSchool.Application.Services.Repositories;
 
-    public interface IRefreshTokenRepository : IAsyncRepository<RefreshToken>, IRepository<RefreshToken>
-    {
-    }
+public interface IRefreshTokenRepository : IAsyncRepository<RefreshToken>, IRepository<RefreshToken>
+{
+}

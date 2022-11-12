@@ -3,12 +3,11 @@ using Core.Security.Entities;
 using OwlSchool.Application.Services.Repositories;
 using OwlSchool.Persistence.Contexts;
 
-namespace OwlSchool.Persistence.Repositories;
+namespace Persistence.Repositories;
 
-    public class RefreshTokenRepository : EFRepositoryBase<RefreshToken, BaseDbContext>,IRefreshTokenRepository
+public class RefreshTokenRepository : EfRepositoryBase<RefreshToken, BaseDbContext>, IRefreshTokenRepository
+{
+    public RefreshTokenRepository(BaseDbContext context) : base(context)
     {
-        public RefreshTokenRepository(BaseDbContext context) : base(context)
-        {
-        }
     }
-
+}

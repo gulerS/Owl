@@ -5,7 +5,7 @@ using OwlSchool.Persistence.Contexts;
 
 namespace OwlSchool.Persistence.Repositories;
 
-public class ClassRepository: EFRepositoryBase<Class, BaseDbContext>, IClassRepository
+public class ClassRepository: EfRepositoryBase<Class, BaseDbContext>, IClassRepository
 {
     public ClassRepository(BaseDbContext context) : base(context)
     {

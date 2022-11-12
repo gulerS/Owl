@@ -1,3 +1,4 @@
+using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Persistence.Paging;
 using OwlSchool.Application.Services.Repositories;
@@ -5,7 +6,7 @@ using OwlSchool.Domain.Entities;
 
 namespace OwlSchool.Application.Features.Classes.Rules;
 
-public class ClassBusinessRules
+public class ClassBusinessRules: BaseBusinessRules
 {
     private readonly IClassRepository _classRepository;
 
