@@ -56,7 +56,7 @@ public class EnableEmailAuthenticatorCommand : IRequest
             _mailService.SendMail(new Mail
             {
                 ToList = toEmailList,
-                Subject = "Verify Your Email - RentACar",
+                Subject = "Verify Your Email - Owl",
                 TextBody =
                     $"Click on the link to verify your email: {request.VerifyEmailUrlPrefix}?ActivationKey={HttpUtility.UrlEncode(addedEmailAuthenticator.ActivationKey)}"
             });

@@ -1,51 +1,56 @@
-
+using System.Reflection;
+using Core.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Core.Security.Entities;
-using OwlSchool.Domain.Entities;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace OwlSchool.Persistence.Contexts;
 
-    public class BaseDbContext : DbContext
+   public class BaseDbContext : DbContext
+{
+    protected IConfiguration Configuration { get; set; }
+
+    public DbSet<EmailAuthenticator> EmailAuthenticators { get; set; }
+
+    public DbSet<OperationClaim> OperationClaims { get; set; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+    public DbSet<RefreshToken> RefreshTokens { get; set; }
+    public DbSet<OtpAuthenticator> OtpAuthenticators { get; set; }
+
+    public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
     {
-        protected IConfiguration Configuration { get; set; }
-        public DbSet<Class> Classes { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<OperationClaim> OperationClaims { get; set; }
-        public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
-        public DbSet<RefreshToken> RefreshTokens { get; set; }
-
-
-        public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration) : base(dbContextOptions)
-        {
-            Configuration = configuration;
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //if (!optionsBuilder.IsConfigured)
-            //    base.OnConfiguring(
-            //        optionsBuilder.UseSqlServer(Configuration.GetConnectionString("SomeConnectionString")));
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Class>(a =>
-            {
-                a.ToTable("Class").HasKey(k => k.Id);
-                a.Property(p => p.Id).HasColumnName("Id");
-                a.Property(p => p.Name).HasColumnName("Name");
-                a.Property(p => p.Floor).HasColumnName("Floor");
-            });
-
-          
-       
-
-            Class[] classEntitySeeds = { new Class{Id=1,Floor = 1,Name = "Science 1"},new Class{Id=2,Floor = 2,Name = "Science 2"}  };
-            modelBuilder.Entity<Class>().HasData(classEntitySeeds);
-
-         
-
-           
-        }
+        Configuration = configuration;
     }
+    
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    {
+
+        IEnumerable<EntityEntry<Entity>> datas = ChangeTracker
+            .Entries<Entity>().Where(e =>
+                e.State == EntityState.Added || e.State == EntityState.Modified);
+
+        foreach (var data in datas)
+        {
+            _ = data.State switch
+            {
+                EntityState.Added => data.Entity.CreatedDate = DateTime.UtcNow,
+                EntityState.Modified => data.Entity.UpdatedDate = DateTime.UtcNow
+            };
+        }
+        return await base.SaveChangesAsync(cancellationToken);
+    }
+    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        //if (!optionsBuilder.IsConfigured)
+        //    base.OnConfiguring(
+        //        optionsBuilder.UseSqlServer(Configuration.GetConnectionString("OwlSchoolConnectionString")));
+    }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+    }
+}

@@ -174,7 +174,7 @@ public class AuthManager : IAuthService
         _mailService.SendMail(new Mail
         {
             ToList = toEmailList,
-            Subject = "Authenticator Code - RentACar",
+            Subject = "Authenticator Code - Owl",
             TextBody = $"Enter your authenticator code: {authenticatorCode}"
         });
     }
